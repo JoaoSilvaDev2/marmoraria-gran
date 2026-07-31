@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Granorte Marmoraria</title>
+  <link rel="icon" href="static/logo-dourada.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#F5EFE6',
+              100: '#E8D9C4',
+              200: '#D4BC9A',
+              300: '#C4A575',
+              400: '#B89968',
+              500: '#B08D57',
+              600: '#9A7849',
+              700: '#7D613A',
+              800: '#5F4A2C',
+              900: '#3F311D',
+            },
+            graphite: '#1E1E1E',
+            ice: '#F8F8F6',
+            concrete: '#A8A8A8',
+            stone: {
+              300: '#C8C8C8',
+              400: '#A8A8A8',
+              500: '#8E8E8E',
+              600: '#6E6E6E',
+            },
+            neutral: {
+              800: '#2A2A2A',
+              900: '#252525',
+              950: '#1E1E1E',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1E1E1E; color: #F8F8F6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1E1E1E; }
+    ::-webkit-scrollbar-thumb { background: #B08D57; border-radius: 3px; }
+
+    /* ── Header ── */
+    #navbar {
+      transition: background 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  backdrop-filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #navbar.nav-scrolled {
+      background: rgba(30, 30, 30, 0.72);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: 1px solid rgba(248, 248, 246, 0.06);
+    }
+    .nav-logo { transition: height 0.5s ease, opacity 0.5s ease; }
+    #navbar.nav-scrolled .nav-logo { height: 1.625rem; }
+
+    .menu-trigger {
+      width: 2.5rem; height: 2.5rem;
+      display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 0;
+    }
+    .menu-trigger span {
+      display: block; height: 1px; background: #F8F8F6;
+      transition: width 0.35s ease, transform 0.35s ease, opacity 0.35s ease;
+    }
+    .menu-trigger span:nth-child(1) { width: 1.375rem; }
+    .menu-trigger span:nth-child(2) { width: 1rem; }
+    .menu-trigger.open span:nth-child(1) { width: 1.25rem; transform: translateY(3px) rotate(45deg); }
+    .menu-trigger.open span:nth-child(2) { width: 1.25rem; transform: translateY(-3px) rotate(-45deg); }
+
+    /* ── Hero ── */
+    .hero-section { min-height: 100dvh; position: relative; background: #1E1E1E; }
+
+    .hero-media {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 60vh; min-height: 340px;
+      overflow: hidden;
+    }
+    .hero-image {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: 68% 32%;
+      transform: scale(1.05);
+      animation: heroZoom 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(30, 30, 30, 0.92) 0%,
+        rgba(30, 30, 30, 0.45) 28%,
+        rgba(30, 30, 30, 0.08) 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-body {
+      position: relative; z-index: 2;
+      min-height: 100dvh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 5rem 1.5rem 5rem;
+    }
+    @media (min-width: 768px) {
+      .hero-media { height: 62vh; }
+      .hero-image { object-position: center 40%; }
+      .hero-body { padding: 0 2rem 3rem; padding-top: 6rem; }
+    }
+    @media (min-width: 1024px) {
+      .hero-body { max-width: 80rem; margin: 0 auto; width: 100%; }
+    }
+
+    .hero-enter {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-enter.active { opacity: 1; transform: translateY(0); }
+    .hero-enter-d1 { transition-delay: 0.15s; }
+    .hero-enter-d2 { transition-delay: 0.3s; }
+    .hero-enter-d3 { transition-delay: 0.45s; }
+    .hero-enter-d4 { transition-delay: 0.6s; }
+
+    .btn-gold {
+      position: relative; overflow: hidden;
+      background: #B08D57; color: #1E1E1E;
+      font-weight: 500; letter-spacing: 0.01em;
+      border-radius: 9999px;
+      transition: background 0.35s ease, transform 0.35s ease;
+    }
+    .btn-gold:hover { background: #C4A575; }
+    .btn-gold::after {
+      content: ''; position: absolute; top: 0; left: -120%;
+      width: 55%; height: 100%;
+      background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.22) 50%, transparent 80%);
+      animation: goldShine 5s ease-in-out infinite;
+    }
+    @keyframes goldShine {
+      0%, 70%, 100% { left: -120%; }
+      35% { left: 140%; }
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(248, 248, 246, 0.22);
+      color: #F8F8F6; border-radius: 9999px;
+      font-weight: 500; letter-spacing: 0.01em;
+      transition: border-color 0.35s ease, background 0.35s ease;
+    }
+    .btn-outline:hover {
+      border-color: rgba(176, 141, 87, 0.5);
+      background: rgba(176, 141, 87, 0.06);
+    }
+
+    .hero-trust {
+      display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+      padding-top: 1.75rem; margin-top: 1.75rem;
+      border-top: 1px solid rgba(248, 248, 246, 0.08);
+    }
+    .hero-trust-item { font-size: 0.75rem; color: #A8A8A8; letter-spacing: 0.02em; }
+    .hero-trust-item strong { color: #F8F8F6; font-weight: 500; }
+    .hero-stars { color: #B08D57; letter-spacing: 0.12em; font-size: 0.65rem; }
+
+    .scroll-hint {
+      position: absolute; bottom: 1.25rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+      color: #A8A8A8; font-size: 0.625rem; letter-spacing: 0.18em; text-transform: uppercase;
+      animation: scrollBob 2.4s ease-in-out infinite;
+    }
+    .scroll-hint svg { opacity: 0.6; }
+    @keyframes scrollBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(6px); opacity: 1; }
+    }
+
+    /* Reveal Animations */
+    .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* Product Card */
+    .product-card { transition: opacity 0.25s ease; border-color: rgba(255,255,255,0.05); }
+    .product-card:hover { border-color: rgba(176, 141, 87, 0.25); }
+    .product-card.hidden-card { opacity: 0; position: absolute; pointer-events: none; }
+    .product-card.visible-card { opacity: 1; position: relative; pointer-events: auto; }
+
+    /* Ambient Image */
+    .ambient-img { overflow: hidden; }
+    .ambient-img img { transition: opacity 0.3s ease; }
+    .ambient-img:hover img { opacity: 0.92; }
+
+    /* Navbar legacy — used by rest of page */
+    .nav-scrolled { background: rgba(30, 30, 30, 0.72); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid rgba(248,248,246,0.06); }
+
+    /* Filter Button */
+    .filter-btn { transition: all 0.2s ease; }
+    .filter-btn.active-filter { background: #B08D57; color: #1E1E1E; border-color: #B08D57; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9998;
+      background: rgba(30, 30, 30, 0.95); backdrop-filter: blur(12px);
+      border: 1px solid rgba(176, 141, 87, 0.35); border-radius: 12px;
+      padding: 1rem 1.5rem; color: #F8F8F6;
+      transform: translateY(120%); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9990;
+      background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.4s ease; cursor: zoom-out;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; transform: scale(0.9); transition: transform 0.4s ease; }
+    .lightbox.open img { transform: scale(1); }
+
+    /* Input styles */
+    .form-input {
+      background: rgba(248,248,246,0.05); border: 1px solid rgba(168,168,168,0.2);
+      border-radius: 8px; padding: 0.75rem 1rem; color: #F8F8F6; width: 100%;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease; outline: none;
+      font-family: 'Inter', sans-serif; font-size: 0.875rem;
+    }
+    .form-input:focus { border-color: #B08D57; box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.18); }
+    .form-input::placeholder { color: #A8A8A8; }
+
+    /* Floating label style select */
+    select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A8A8A8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+  </style>
+</head>
+<body>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span id="toastMsg" class="text-sm">Mensagem enviada</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="flex items-center justify-between h-16 md:h-[4.25rem]">
+        <a href="#" class="block">
+          <img src="static/logo-dourada.png" alt="Granorte Marmoraria" class="nav-logo h-7 md:h-8 w-auto">
+        </a>
+        <button id="menuToggle" class="menu-trigger" aria-label="Menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu fixed inset-0 z-40 bg-graphite/95 backdrop-blur-2xl" id="mobileMenu">
+    <div class="flex flex-col justify-center h-full px-8 md:px-16 gap-1">
+      <a href="#materiais" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Materiais</a>
+      <a href="#ambientes" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Projetos</a>
+      <a href="#sobre" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Sobre</a>
+      <a href="#contato" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Contato</a>
+      <div class="mt-10 pt-8 border-t border-white/8">
+        <a href="#cotacao" onclick="toggleMobileMenu()" class="inline-flex btn-gold px-8 py-3.5 text-sm">
+          Solicitar orçamento
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero-section" id="hero">
+    <div class="hero-media">
+      <img
+        src="static/fundo-hero.png"
+        alt="Bancada em mármore negro com veios dourados — Granorte Marmoraria"
+        class="hero-image"
+        fetchpriority="high"
+      >
+      <div class="hero-gradient"></div>
+    </div>
+
+    <div class="hero-body">
+      <div class="max-w-2xl">
+        <h1 class="text-[1.75rem] sm:text-4xl md:text-[2.75rem] lg:text-5xl font-semibold leading-[1.12] tracking-tight text-ice mb-4 md:mb-5 hero-enter" id="heroTitle">
+          Transformamos pedras naturais em ambientes inesquecíveis.
+        </h1>
+
+        <p class="text-sm sm:text-base text-concrete leading-relaxed max-w-lg mb-7 md:mb-8 hero-enter hero-enter-d1" id="heroDesc">
+          Mármore, granito, quartzo e porcelanato. Escolha o material ideal para o seu projeto e conte com uma equipe especializada em corte, acabamento e instalação.
+        </p>
+
+        <div class="flex flex-wrap gap-3 hero-enter hero-enter-d2" id="heroBtns">
+          <a href="#cotacao" class="btn-gold inline-flex items-center px-7 py-3.5 text-sm">
+            Solicitar orçamento
+          </a>
+          <a href="#contato" class="btn-outline inline-flex items-center px-7 py-3.5 text-sm">
+            Visitar showroom
+          </a>
+        </div>
+
+        <div class="hero-trust hero-enter hero-enter-d3" id="heroTrust">
+          <div class="hero-trust-item">
+            <span class="hero-stars">★★★★★</span>
+            <strong class="ml-2">4,9</strong>
+          </div>
+          <div class="hero-trust-item"><strong>+2.000</strong> projetos realizados</div>
+          <div class="hero-trust-item">Atendimento em todo o <strong>Rio de Janeiro</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#materiais" class="scroll-hint hero-enter hero-enter-d4" id="heroScroll" aria-label="Rolar para conteúdo">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
+    </a>
+  </section>
+
+  <!-- MARCAS -->
+  <section class="py-10 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <p class="text-sm text-stone-500 mb-5">Trabalhamos com marcas como Silestone, Dekton, Caesarstone, Neolith, Levantina e Antolini.</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
+        <span>Silestone</span>
+        <span>Dekton</span>
+        <span>Caesarstone</span>
+        <span>Neolith</span>
+        <span>Levantina</span>
+        <span>Antolini</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO / MATERIAIS -->
+  <section class="py-20 lg:py-28 bg-neutral-950" id="materiais">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 reveal">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">Materiais</h2>
+          <p class="text-stone-500 text-sm max-w-md">Parte do que temos em estoque. Se não encontrar o que procura, mande uma mensagem — a gente ajuda a escolher.</p>
+        </div>
+        <div class="flex flex-wrap gap-2" id="filterBtns">
+          <button class="filter-btn active-filter text-xs font-medium px-4 py-2 rounded-md border border-white/10" data-filter="todos" onclick="filterProducts('todos')">Todos</button>
+          <button class="filter-btn text-xs font-medium px-4 py-2 rounded-md border border-white/10 text-stone-400" data-filter="marmore" onclick="filterProducts('marmore')">Mármore</button>
+          <button class="filter-btn text-xs font-medium px-4 py-2 rounded-md border border-white/10 text-stone-400" data-filter="granito" onclick="filterProducts('granito')">Granito</button>
+          <button class="filter-btn text-xs font-medium px-4 py-2 rounded-md border border-white/10 text-stone-400" data-filter="quartzo" onclick="filterProducts('quartzo')">Quartzo</button>
+          <button class="filter-btn text-xs font-medium px-4 py-2 rounded-md border border-white/10 text-stone-400" data-filter="porcelanato" onclick="filterProducts('porcelanato')">Porcelanato</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="productGrid">
+        <!-- Products will be injected by JS -->
+      </div>
+
+      <div class="text-center mt-10 reveal">
+        <a href="#cotacao" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">
+          Não achou o material? Peça um orçamento →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="py-20 lg:py-28" id="ambientes">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="mb-10 reveal">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">Projetos realizados</h2>
+        <p class="text-stone-500 text-sm max-w-lg">Alguns trabalhos feitos pela Granorte — bancadas, revestimentos e acabamentos em pedra natural.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal" id="projectGallery">
+        <div class="ambient-img rounded-xl cursor-pointer relative lg:col-span-2 lg:row-span-2" onclick="openLightbox('static/marmore (1).jpeg')">
+          <img src="static/marmore (1).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 lg:h-full min-h-[16rem] object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (2).jpeg')">
+          <img src="static/marmore (2).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (3).jpeg')">
+          <img src="static/marmore (3).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (4).jpeg')">
+          <img src="static/marmore (4).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (5).jpeg')">
+          <img src="static/marmore (5).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (6).jpeg')">
+          <img src="static/marmore (6).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+        <div class="ambient-img rounded-xl cursor-pointer relative sm:col-span-2 lg:col-span-1" onclick="openLightbox('static/marmore (7).jpeg')">
+          <img src="static/marmore (7).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="py-20 lg:py-28 bg-neutral-950" id="sobre">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8 reveal">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-6">Quem somos</h2>
+      <p class="text-stone-400 leading-relaxed mb-5">
+        A Granorte Marmoraria nasceu em 1997 no Rio de Janeiro. Hoje atendemos arquitetos, construtoras e clientes finais — mas o jeito de trabalhar continua o mesmo: atendimento direto, sem enrolação.
+      </p>
+      <p class="text-stone-400 leading-relaxed mb-8">
+        Temos mármores importados, granitos nacionais e superfícies como Silestone e Dekton. Você escolhe a pedra no showroom e a gente cuida do corte, acabamento e instalação.
+      </p>
+      <ul class="space-y-3 text-sm text-stone-400 mb-8">
+        <li class="flex gap-2"><span class="text-brand-400">—</span> Showroom com amostras disponíveis para ver e tocar</li>
+        <li class="flex gap-2"><span class="text-brand-400">—</span> Corte e acabamento na própria fábrica</li>
+        <li class="flex gap-2"><span class="text-brand-400">—</span> Instalação com equipe própria</li>
+      </ul>
+      <a href="#ambientes" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">Ver projetos realizados →</a>
+    </div>
+  </section>
+
+  <!-- COTAÇÃO / CONTATO -->
+  <section class="py-20 lg:py-28 bg-neutral-950" id="contato">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16" id="cotacao">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">Fale conosco</h2>
+          <p class="text-stone-400 leading-relaxed mb-8">Manda os detalhes do projeto — material, metragem, prazo — que a gente responde com um orçamento.</p>
+
+          <div class="space-y-5 text-sm">
+            <div>
+              <p class="text-stone-300 mb-1">Endereço</p>
+              <p class="text-stone-500">Av. Pastor Martin Luther King Jr., 13655<br>Rio de Janeiro, RJ</p>
+            </div>
+            <div>
+              <p class="text-stone-300 mb-1">E-mail</p>
+              <p class="text-stone-500"><a href="mailto:granortemarmores@gmail.com" class="hover:text-ice transition-colors">granortemarmores@gmail.com</a></p>
+            </div>
+            <div>
+              <p class="text-stone-300 mb-1">WhatsApp</p>
+              <p class="text-stone-500"><a href="https://wa.me/5521974793847" target="_blank" class="hover:text-ice transition-colors">(21) 97479-3847</a></p>
+            </div>
+            <div>
+              <p class="text-stone-300 mb-1">Horário</p>
+              <p class="text-stone-500">Seg–Sex, 8h–18h · Sáb, 8h–13h</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form id="quoteForm" class="bg-neutral-900 border border-white/5 rounded-xl p-6 lg:p-8" onsubmit="handleSubmit(event)">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-xs text-stone-400 mb-1.5 font-medium">Nome completo *</label>
+                <input type="text" class="form-input" placeholder="Seu nome" required>
+              </div>
+              <div>
+                <label class="block text-xs text-stone-400 mb-1.5 font-medium">E-mail *</label>
+                <input type="email" class="form-input" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-xs text-stone-400 mb-1.5 font-medium">Telefone *</label>
+                <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
+              </div>
+              <div>
+                <label class="block text-xs text-stone-400 mb-1.5 font-medium">Profissão</label>
+                <select class="form-input">
+                  <option value="">Selecione</option>
+                  <option>Arquiteto(a)</option>
+                  <option>Designer de Interiores</option>
+                  <option>Empreiteiro(a)</option>
+                  <option>Consumidor Final</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs text-stone-400 mb-1.5 font-medium">Tipo de material</label>
+              <select class="form-input">
+                <option value="">Selecione o material</option>
+                <option>Mármore</option>
+                <option>Granito</option>
+                <option>Quartzo (Silestone / Caesarstone)</option>
+                <option>Porcelanato (Dekton / Neolith)</option>
+                <option>Ônix</option>
+                <option>Travertine</option>
+                <option>Ainda não sei</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs text-stone-400 mb-1.5 font-medium">Aplicação</label>
+              <select class="form-input">
+                <option value="">Selecione a aplicação</option>
+                <option>Bancada de cozinha</option>
+                <option>Bancada de banheiro</option>
+                <option>Piso</option>
+                <option>Revestimento de parede</option>
+                <option>Lareira</option>
+                <option>Escada</option>
+                <option>Área externa</option>
+                <option>Vários</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label class="block text-xs text-stone-400 mb-1.5 font-medium">Descrição do projeto</label>
+              <textarea class="form-input" rows="4" placeholder="Conte-nos sobre seu projeto, metragem aproximada, prazos..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-400 text-graphite font-medium py-3 rounded-md transition-colors">
+              Enviar
+            </button>
+            <p class="text-xs text-stone-600 text-center mt-3">Respondemos em até 1 dia útil.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
+        <div>
+          <img src="static/logo-dourada.png" alt="Granorte Marmoraria" class="h-9 w-auto mb-4">
+          <p class="text-sm text-stone-500 leading-relaxed">Granorte Marmoraria Ltda — Rio de Janeiro, RJ. Mármore, granito, quartzo e porcelanato.</p>
+        </div>
+
+        <div>
+          <p class="text-sm text-stone-300 mb-3">Materiais</p>
+          <ul class="space-y-2 text-sm text-stone-500">
+            <li><a href="#materiais" class="hover:text-ice transition-colors">Catálogo</a></li>
+            <li><a href="#ambientes" class="hover:text-ice transition-colors">Projetos</a></li>
+            <li><a href="#sobre" class="hover:text-ice transition-colors">Sobre</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-sm text-stone-300 mb-3">Contato</p>
+          <ul class="space-y-2 text-sm text-stone-500">
+            <li>Av. Pastor Martin Luther King Jr., 13655</li>
+            <li><a href="mailto:granortemarmores@gmail.com" class="hover:text-ice transition-colors">granortemarmores@gmail.com</a></li>
+            <li><a href="https://wa.me/5521974793847" target="_blank" class="hover:text-ice transition-colors">WhatsApp · (21) 97479-3847</a></li>
+            <li><a href="#cotacao" class="hover:text-ice transition-colors">Pedir orçamento</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-xs text-stone-600">
+        <p>&copy; 2026 Granorte Marmoraria Ltda</p>
+        <p>CNPJ 02.195.761/0001-71 · Rio de Janeiro, RJ</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/5521974793847" target="_blank" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-green-700 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors" aria-label="WhatsApp">
+    <span class="iconify text-white text-xl" data-icon="lucide:message-circle"></span>
+  </a>
+
+  <script>
+    // ==========================================
+    // PRODUCT DATA
+    // ==========================================
+    const categoryLabels = {
+      marmore: 'Mármore',
+      granito: 'Granito',
+      quartzo: 'Quartzo',
+      porcelanato: 'Porcelanato',
+    };
+
+    const products = [
+      { name: 'Calacatta Gold', category: 'marmore', origin: 'Itália', desc: 'Branco com veios dourados' },
+      { name: 'Statuario Venato', category: 'marmore', origin: 'Itália', desc: 'Branco com veios cinza delicados' },
+      { name: 'Nero Marquina', category: 'marmore', origin: 'Espanha', desc: 'Preto com veios brancos' },
+      { name: 'Carrara Bianco', category: 'marmore', origin: 'Itália', desc: 'Branco clássico, veios suaves' },
+      { name: 'São Gabriel Cinza', category: 'granito', origin: 'Brasil', desc: 'Cinza com movimento natural' },
+      { name: 'Blue Bahia', category: 'granito', origin: 'Brasil', desc: 'Azul profundo com reflexos' },
+      { name: 'Granito Preto São Tomé', category: 'granito', origin: 'Brasil', desc: 'Preto uniforme' },
+      { name: 'Ubatuba Verde', category: 'granito', origin: 'Brasil', desc: 'Verde escuro, uso interno' },
+      { name: 'Silestone Miami Vena', category: 'quartzo', origin: 'Espanha', desc: 'Quartzo com veio marmorizado' },
+      { name: 'Caesarstone Calacatta Nuovo', category: 'quartzo', origin: 'Israel', desc: 'Imitação de Calacatta' },
+      { name: 'Silestone Eternal Marfil', category: 'quartzo', origin: 'Espanha', desc: 'Tom marfim, baixa manutenção' },
+      { name: 'Caesarstone Cloudburst Concrete', category: 'quartzo', origin: 'Israel', desc: 'Aspecto cimento, tom neutro' },
+      { name: 'Dekton Laurent', category: 'porcelanato', origin: 'Espanha', desc: 'Inspirado no mármore Laurent' },
+      { name: 'Neolith Calacatta Gold', category: 'porcelanato', origin: 'Espanha', desc: 'Grandes formatos, pouca emenda' },
+      { name: 'Dekton Kozium', category: 'porcelanato', origin: 'Espanha', desc: 'Cinza neutro para cozinha' },
+      { name: 'Neolith Pietra Grey', category: 'porcelanato', origin: 'Espanha', desc: 'Cinza com textura de pedra' },
+    ];
+
+    // ==========================================
+    // RENDER PRODUCTS
+    // ==========================================
+    const productGrid = document.getElementById('productGrid');
+
+    function renderProducts(filter = 'todos') {
+      const filtered = filter === 'todos' ? products : products.filter(p => p.category === filter);
+      productGrid.innerHTML = '';
+      filtered.forEach((p) => {
+        const card = document.createElement('div');
+        card.className = 'product-card visible-card rounded-xl bg-neutral-900 border p-5';
+        card.innerHTML = `
+          <span class="inline-block text-[10px] uppercase tracking-wide text-brand-400 mb-2">${categoryLabels[p.category]}</span>
+          <h3 class="font-medium text-sm mb-1">${p.name}</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">${p.desc}</p>
+          <p class="text-xs text-stone-600 mt-3">${p.origin}</p>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+    renderProducts();
+
+    // ==========================================
+    // FILTER PRODUCTS
+    // ==========================================
+    function filterProducts(category) {
+      // Update filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active-filter');
+        btn.classList.add('text-stone-400');
+        if (btn.dataset.filter === category) {
+          btn.classList.add('active-filter');
+          btn.classList.remove('text-stone-400');
+        }
+      });
+
+      // Animate out then re-render
+      const cards = productGrid.querySelectorAll('.product-card');
+      cards.forEach(c => {
+        c.classList.remove('visible-card');
+        c.classList.add('hidden-card');
+      });
+
+      setTimeout(() => renderProducts(category), 300);
+
+      // Scroll to section if coming from category cards
+      const matSection = document.getElementById('materiais');
+      if (matSection) {
+        const rect = matSection.getBoundingClientRect();
+        if (rect.top > 100 || rect.bottom < 0) {
+          matSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    // ==========================================
+    // LIGHTBOX
+    // ==========================================
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightboxImg').src = src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ==========================================
+    // MOBILE MENU
+    // ==========================================
+    let mobileOpen = false;
+    function toggleMobileMenu() {
+      mobileOpen = !mobileOpen;
+      document.getElementById('mobileMenu').classList.toggle('open', mobileOpen);
+      document.getElementById('menuToggle').classList.toggle('open', mobileOpen);
+      document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    }
+
+    // ==========================================
+    // NAVBAR SCROLL
+    // ==========================================
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('nav-scrolled', window.scrollY > 24);
+    });
+
+    // Hero entrance
+    requestAnimationFrame(() => {
+      ['heroTitle', 'heroDesc', 'heroBtns', 'heroTrust', 'heroScroll'].forEach(id => {
+        document.getElementById(id)?.classList.add('active');
+      });
+    });
+
+    // ==========================================
+    // INTERSECTION OBSERVER - REVEALS
+    // ==========================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ==========================================
+    // FORM SUBMIT
+    // ==========================================
+    function handleSubmit(e) {
+      e.preventDefault();
+      showToast('Recebemos sua mensagem. Retornamos em breve.');
+      e.target.reset();
+    }
+
+    // ==========================================
+    // TOAST
+    // ==========================================
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+  </script>
+</body>
+</html>
