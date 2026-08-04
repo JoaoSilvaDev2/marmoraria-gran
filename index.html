@@ -116,6 +116,19 @@
     .menu-trigger.open span:nth-child(1) { width: 1.25rem; transform: translateY(3px) rotate(45deg); }
     .menu-trigger.open span:nth-child(2) { width: 1.25rem; transform: translateY(-3px) rotate(-45deg); }
 
+    .nav-cta {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.6875rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 12px rgba(176, 141, 87, 0.16);
+    }
+    @media (min-width: 640px) {
+      .nav-cta { padding: 0.5625rem 1.125rem; font-size: 0.75rem; }
+    }
+    @media (min-width: 768px) {
+      .nav-cta { padding: 0.625rem 1.375rem; font-size: 0.8125rem; }
+    }
+
     /* ── Hero ── */
     .hero-section { min-height: 100dvh; position: relative; background: #1E1E1E; }
 
@@ -187,6 +200,18 @@
       padding: 0.9375rem 2rem;
       font-size: 0.9375rem;
       box-shadow: 0 4px 20px rgba(176, 141, 87, 0.22);
+    }
+    .btn-gold-sm {
+      padding: 0.75rem 1.625rem;
+      font-size: 0.8125rem;
+      box-shadow: 0 2px 14px rgba(176, 141, 87, 0.18);
+    }
+    .section-cta {
+      display: flex; justify-content: center;
+      margin-top: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .section-cta { margin-top: 3rem; }
     }
     @media (min-width: 768px) {
       .btn-gold-primary { padding: 1rem 2.25rem; font-size: 1rem; }
@@ -506,10 +531,16 @@
         <a href="#" class="block">
           <img src="static/logo-dourada.png" alt="Granorte Marmoraria" class="nav-logo h-7 md:h-8 w-auto">
         </a>
-        <button id="menuToggle" class="menu-trigger" aria-label="Menu" onclick="toggleMobileMenu()">
-          <span></span>
-          <span></span>
-        </button>
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <a href="#cotacao" class="btn-gold nav-cta inline-flex items-center">
+            <span class="sm:hidden">Orçamento grátis</span>
+            <span class="hidden sm:inline">Solicitar orçamento gratuito</span>
+          </a>
+          <button id="menuToggle" class="menu-trigger" aria-label="Menu" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </div>
   </nav>
@@ -528,7 +559,7 @@
           WhatsApp · (21) 97479-3847
         </a>
         <a href="#cotacao" onclick="toggleMobileMenu()" class="inline-flex btn-gold btn-gold-primary px-8 py-3.5 text-sm w-fit">
-          Solicitar orçamento
+          Solicitar orçamento gratuito
         </a>
       </div>
     </div>
@@ -617,6 +648,11 @@
           <p class="text-xs text-stone-500 leading-relaxed">Consultoria na escolha do material e acompanhamento em cada etapa.</p>
         </div>
       </div>
+      <div class="section-cta reveal">
+        <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+          Solicitar orçamento gratuito
+        </a>
+      </div>
     </div>
   </section>
 
@@ -657,9 +693,9 @@
         <!-- Products will be injected by JS -->
       </div>
 
-      <div class="text-center mt-10 reveal">
-        <a href="#cotacao" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">
-          Não achou o material? Peça um orçamento →
+      <div class="section-cta reveal">
+        <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+          Solicitar orçamento gratuito
         </a>
       </div>
     </div>
@@ -675,6 +711,11 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal auto-rows-fr" id="projectGallery"></div>
+      <div class="section-cta reveal">
+        <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+          Solicitar orçamento gratuito
+        </a>
+      </div>
     </div>
   </section>
 
@@ -698,6 +739,11 @@
           <p class="metric-value"><span data-count="100" data-suffix="%">0</span></p>
           <p class="metric-label">Equipe própria</p>
         </div>
+      </div>
+      <div class="section-cta reveal">
+        <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+          Solicitar orçamento gratuito
+        </a>
       </div>
     </div>
   </section>
@@ -743,6 +789,11 @@
           <p class="testimonial-stars mb-3">★★★★★</p>
           <p class="text-sm text-stone-400 leading-relaxed">"Qualidade impecável na instalação. A Granorte entende o que arquitetos e designers precisam."</p>
         </div>
+      </div>
+      <div class="section-cta reveal">
+        <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+          Solicitar orçamento gratuito
+        </a>
       </div>
     </div>
   </section>
@@ -790,7 +841,12 @@
             <li class="flex gap-2"><span class="text-brand-400">—</span> Corte e acabamento na própria fábrica</li>
             <li class="flex gap-2"><span class="text-brand-400">—</span> Instalação com equipe própria</li>
           </ul>
-          <a href="#ambientes" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">Ver projetos realizados →</a>
+          <div class="flex flex-wrap gap-4 items-center">
+            <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm">
+              Solicitar orçamento gratuito
+            </a>
+            <a href="#ambientes" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">Ver projetos realizados →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -821,6 +877,9 @@
           <p class="section-label">Contato</p>
           <h2 class="section-title mb-4">Fale conosco</h2>
           <p class="text-stone-400 leading-relaxed mb-8">Nossa equipe vai até o seu endereço para medir e preparar o orçamento. Também pode mandar os detalhes do projeto — material, metragem, prazo — que a gente responde.</p>
+          <a href="#cotacao" class="btn-gold btn-gold-sm inline-flex items-center px-7 py-3 text-sm mb-8">
+            Solicitar orçamento gratuito
+          </a>
 
           <div class="space-y-5 text-sm">
             <div>
@@ -950,7 +1009,7 @@
             <li>Av. Pastor Martin Luther King Jr., 13655</li>
             <li><a href="mailto:granortemarmores@gmail.com" class="hover:text-ice transition-colors">granortemarmores@gmail.com</a></li>
             <li><a href="https://wa.me/5521974793847" target="_blank" class="hover:text-ice transition-colors">WhatsApp · (21) 97479-3847</a></li>
-            <li><a href="#cotacao" class="hover:text-ice transition-colors">Pedir orçamento</a></li>
+            <li><a href="#cotacao" class="hover:text-ice transition-colors">Solicitar orçamento gratuito</a></li>
           </ul>
         </div>
       </div>
@@ -1033,7 +1092,7 @@
             <p class="text-xs text-stone-500 leading-relaxed">${p.desc}</p>
             <p class="text-xs text-stone-600 mt-2">${p.origin}</p>
             <a href="#cotacao" class="product-card-btn">
-              Solicitar orçamento
+              Solicitar orçamento gratuito
               <span class="iconify" data-icon="lucide:arrow-right"></span>
             </a>
           </div>
