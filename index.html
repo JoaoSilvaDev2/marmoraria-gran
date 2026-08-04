@@ -48,9 +48,39 @@
     }
   </script>
   <style>
+    :root {
+      --radius-card: 12px;
+      --section-py: 5.5rem;
+      --section-py-lg: 8rem;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1E1E1E; color: #F8F8F6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1E1E1E;
+      color: #F8F8F6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    body > * { position: relative; z-index: 1; }
+    .section-padding { padding-top: var(--section-py); padding-bottom: var(--section-py); }
+    @media (min-width: 1024px) {
+      .section-padding { padding-top: var(--section-py-lg); padding-bottom: var(--section-py-lg); }
+    }
+    .section-label {
+      font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #B08D57; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+    }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
@@ -146,9 +176,21 @@
       background: #B08D57; color: #1E1E1E;
       font-weight: 500; letter-spacing: 0.01em;
       border-radius: 9999px;
-      transition: background 0.35s ease, transform 0.35s ease;
+      transition: background 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
     }
-    .btn-gold:hover { background: #C4A575; }
+    .btn-gold:hover {
+      background: #C4A575;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(176, 141, 87, 0.28);
+    }
+    .btn-gold-primary {
+      padding: 0.9375rem 2rem;
+      font-size: 0.9375rem;
+      box-shadow: 0 4px 20px rgba(176, 141, 87, 0.22);
+    }
+    @media (min-width: 768px) {
+      .btn-gold-primary { padding: 1rem 2.25rem; font-size: 1rem; }
+    }
     .btn-gold::after {
       content: ''; position: absolute; top: 0; left: -120%;
       width: 55%; height: 100%;
@@ -171,14 +213,43 @@
       background: rgba(176, 141, 87, 0.06);
     }
 
-    .hero-trust {
-      display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
-      padding-top: 1.75rem; margin-top: 1.75rem;
+    .hero-benefits {
+      display: flex; flex-direction: column; gap: 0.625rem;
+      padding-top: 1.5rem; margin-top: 1.5rem;
       border-top: 1px solid rgba(248, 248, 246, 0.08);
     }
-    .hero-trust-item { font-size: 0.75rem; color: #A8A8A8; letter-spacing: 0.02em; }
-    .hero-trust-item strong { color: #F8F8F6; font-weight: 500; }
-    .hero-stars { color: #B08D57; letter-spacing: 0.12em; font-size: 0.65rem; }
+    @media (min-width: 640px) {
+      .hero-benefits { flex-direction: row; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+    }
+    .hero-benefit {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8125rem; color: #A8A8A8;
+    }
+    .hero-benefit-icon {
+      flex-shrink: 0; width: 1.125rem; height: 1.125rem;
+      color: #B08D57;
+    }
+    .hero-benefit strong { color: #F8F8F6; font-weight: 500; }
+
+    /* Diferenciais */
+    .diff-card {
+      background: rgba(37, 37, 37, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease, background 0.35s ease;
+    }
+    .diff-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(176, 141, 87, 0.2);
+      background: rgba(42, 42, 42, 0.8);
+    }
+    .diff-icon {
+      width: 2.25rem; height: 2.25rem;
+      display: flex; align-items: center; justify-content: center;
+      color: #B08D57; margin-bottom: 1rem;
+    }
 
     .scroll-hint {
       position: absolute; bottom: 1.25rem; left: 50%;
@@ -195,21 +266,156 @@
 
     /* Reveal Animations */
     .reveal {
-      opacity: 0; transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* Product Card */
-    .product-card { transition: opacity 0.25s ease; border-color: rgba(255,255,255,0.05); }
-    .product-card:hover { border-color: rgba(176, 141, 87, 0.25); }
+    /* Product Card Premium */
+    .product-card {
+      background: #252525;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.25s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(176, 141, 87, 0.35);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(176, 141, 87, 0.08);
+    }
     .product-card.hidden-card { opacity: 0; position: absolute; pointer-events: none; }
     .product-card.visible-card { opacity: 1; position: relative; pointer-events: auto; }
+    .product-card-img-wrap {
+      overflow: hidden; aspect-ratio: 4/3;
+      background: #2A2A2A;
+    }
+    .product-card-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover .product-card-img-wrap img { transform: scale(1.06); }
+    .product-card-body { padding: 1.25rem; }
+    .product-card-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 1rem; font-size: 0.75rem; font-weight: 500;
+      color: #B08D57; transition: color 0.25s ease, gap 0.25s ease;
+    }
+    .product-card:hover .product-card-btn { color: #C4A575; gap: 0.5rem; }
 
-    /* Ambient Image */
-    .ambient-img { overflow: hidden; }
-    .ambient-img img { transition: opacity 0.3s ease; }
-    .ambient-img:hover img { opacity: 0.92; }
+    /* Portfolio Premium */
+    .portfolio-card {
+      position: relative; overflow: hidden;
+      border-radius: var(--radius-card);
+      cursor: pointer;
+    }
+    .portfolio-card img {
+      width: 100%; height: 100%; min-height: 16rem; object-fit: cover;
+      filter: saturate(0.92) contrast(1.02) brightness(0.96);
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    }
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+      filter: saturate(1) contrast(1.04) brightness(1);
+    }
+    .portfolio-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(30, 30, 30, 0.92) 0%, rgba(30, 30, 30, 0.4) 45%, transparent 70%);
+      opacity: 0.85;
+      transition: opacity 0.4s ease;
+    }
+    .portfolio-card:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.25rem;
+      transform: translateY(4px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portfolio-card:hover .portfolio-info { transform: translateY(0); }
+    .portfolio-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 0.75rem; font-size: 0.75rem; font-weight: 500;
+      color: #B08D57; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .portfolio-card.featured { min-height: 20rem; }
+    @media (min-width: 1024px) {
+      .portfolio-card.featured { min-height: 100%; }
+    }
+
+    /* Metrics */
+    .metric-item { text-align: center; padding: 1.5rem 1rem; }
+    .metric-value {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 600; letter-spacing: -0.03em;
+      color: #F8F8F6; line-height: 1;
+    }
+    .metric-value .metric-star { color: #B08D57; font-size: 0.85em; }
+    .metric-label {
+      margin-top: 0.5rem; font-size: 0.8125rem;
+      color: #8E8E8E; letter-spacing: 0.02em;
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+      background: #252525;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-card);
+      padding: 1.75rem;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(176, 141, 87, 0.18);
+    }
+    .testimonial-avatar {
+      width: 2.75rem; height: 2.75rem; border-radius: 9999px;
+      background: linear-gradient(135deg, #3F311D, #5F4A2C);
+      border: 1px solid rgba(176, 141, 87, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 600; color: #B08D57;
+    }
+    .testimonial-stars { color: #B08D57; letter-spacing: 0.08em; font-size: 0.65rem; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 1.75rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0.3125rem; top: 0.5rem; bottom: 0.5rem;
+      width: 1px; background: linear-gradient(to bottom, #B08D57, rgba(176, 141, 87, 0.15));
+    }
+    .timeline-item { position: relative; padding-bottom: 1.75rem; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -1.75rem; top: 0.35rem;
+      width: 0.625rem; height: 0.625rem; border-radius: 9999px;
+      background: #B08D57; box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.2);
+    }
+    .timeline-year { font-size: 0.6875rem; font-weight: 500; color: #B08D57; letter-spacing: 0.08em; margin-bottom: 0.25rem; }
+    .timeline-text { font-size: 0.875rem; color: #A8A8A8; line-height: 1.5; }
+
+    /* CTA Final */
+    .cta-final {
+      background: linear-gradient(135deg, rgba(176, 141, 87, 0.08) 0%, rgba(37, 37, 37, 0.6) 50%, rgba(30, 30, 30, 0.9) 100%);
+      border: 1px solid rgba(176, 141, 87, 0.15);
+      border-radius: var(--radius-card);
+    }
+
+    /* Form */
+    .form-trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8125rem; color: #A8A8A8;
+    }
+    .form-trust-check { color: #B08D57; flex-shrink: 0; }
+    .form-premium {
+      background: #252525;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-card);
+    }
 
     /* Navbar legacy — used by rest of page */
     .nav-scrolled { background: rgba(30, 30, 30, 0.72); backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid rgba(248,248,246,0.06); }
@@ -231,10 +437,26 @@
 
     /* Mobile Menu */
     .mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(24px) saturate(1.3);
+      -webkit-backdrop-filter: blur(24px) saturate(1.3);
     }
-    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu-link {
+      font-size: 1.75rem; font-weight: 300; letter-spacing: -0.02em;
+      color: rgba(248, 248, 246, 0.88);
+      padding: 0.625rem 0;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .mobile-menu-link:hover { color: #B08D57; transform: translateX(4px); }
+    .mobile-menu-wa {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 1rem; color: #A8A8A8;
+      transition: color 0.25s ease;
+    }
+    .mobile-menu-wa:hover { color: #F8F8F6; }
 
     /* Lightbox */
     .lightbox {
@@ -248,8 +470,8 @@
 
     /* Input styles */
     .form-input {
-      background: rgba(248,248,246,0.05); border: 1px solid rgba(168,168,168,0.2);
-      border-radius: 8px; padding: 0.75rem 1rem; color: #F8F8F6; width: 100%;
+      background: rgba(248,248,246,0.04); border: 1px solid rgba(168,168,168,0.18);
+      border-radius: var(--radius-card); padding: 0.875rem 1rem; color: #F8F8F6; width: 100%;
       transition: border-color 0.3s ease, box-shadow 0.3s ease; outline: none;
       font-family: 'Inter', sans-serif; font-size: 0.875rem;
     }
@@ -258,6 +480,11 @@
 
     /* Floating label style select */
     select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23A8A8A8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .hero-enter { transition: none; opacity: 1; transform: none; }
+      .product-card:hover, .diff-card:hover, .testimonial-card:hover, .portfolio-card:hover img { transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -288,14 +515,19 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="mobile-menu fixed inset-0 z-40 bg-graphite/95 backdrop-blur-2xl" id="mobileMenu">
-    <div class="flex flex-col justify-center h-full px-8 md:px-16 gap-1">
-      <a href="#materiais" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Materiais</a>
-      <a href="#ambientes" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Projetos</a>
-      <a href="#sobre" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Sobre</a>
-      <a href="#contato" onclick="toggleMobileMenu()" class="text-2xl md:text-3xl font-light text-ice/90 hover:text-brand-400 py-3 transition-colors tracking-tight">Contato</a>
-      <div class="mt-10 pt-8 border-t border-white/8">
-        <a href="#cotacao" onclick="toggleMobileMenu()" class="inline-flex btn-gold px-8 py-3.5 text-sm">
+  <div class="mobile-menu fixed inset-0 z-40 bg-graphite/92" id="mobileMenu">
+    <div class="flex flex-col justify-center h-full px-8 md:px-16 max-w-lg mx-auto">
+      <a href="#hero" onclick="toggleMobileMenu()" class="mobile-menu-link">Início</a>
+      <a href="#ambientes" onclick="toggleMobileMenu()" class="mobile-menu-link">Projetos</a>
+      <a href="#materiais" onclick="toggleMobileMenu()" class="mobile-menu-link">Materiais</a>
+      <a href="#sobre" onclick="toggleMobileMenu()" class="mobile-menu-link">Quem Somos</a>
+      <a href="#contato" onclick="toggleMobileMenu()" class="mobile-menu-link">Contato</a>
+      <div class="mt-8 pt-8 border-t border-white/8 flex flex-col gap-4">
+        <a href="https://wa.me/5521974793847" target="_blank" onclick="toggleMobileMenu()" class="mobile-menu-wa">
+          <span class="iconify text-xl text-green-500" data-icon="lucide:message-circle"></span>
+          WhatsApp · (21) 97479-3847
+        </a>
+        <a href="#cotacao" onclick="toggleMobileMenu()" class="inline-flex btn-gold btn-gold-primary px-8 py-3.5 text-sm w-fit">
           Solicitar orçamento
         </a>
       </div>
@@ -317,29 +549,35 @@
     <div class="hero-body">
       <div class="max-w-2xl">
         <h1 class="text-[1.75rem] sm:text-4xl md:text-[2.75rem] lg:text-5xl font-semibold leading-[1.12] tracking-tight text-ice mb-4 md:mb-5 hero-enter" id="heroTitle">
-          Transformamos pedras naturais em ambientes inesquecíveis.
+          Ambientes que elevam cada detalhe do seu projeto.
         </h1>
 
         <p class="text-sm sm:text-base text-concrete leading-relaxed max-w-lg mb-7 md:mb-8 hero-enter hero-enter-d1" id="heroDesc">
-          Mármore, granito, quartzo e porcelanato. Escolha o material ideal para o seu projeto e conte com uma equipe especializada em corte, acabamento e instalação.
+          Da escolha da pedra à instalação final — fabricamos, medimos no local e entregamos acabamento impecável para quem não abre mão de qualidade.
         </p>
 
         <div class="flex flex-wrap gap-3 hero-enter hero-enter-d2" id="heroBtns">
-          <a href="#cotacao" class="btn-gold inline-flex items-center px-7 py-3.5 text-sm">
-            Solicitar orçamento
+          <a href="#cotacao" class="btn-gold btn-gold-primary inline-flex items-center px-8 py-4 text-sm md:text-base">
+            Solicitar orçamento gratuito
           </a>
-          <a href="#contato" class="btn-outline inline-flex items-center px-7 py-3.5 text-sm">
-            Visitar showroom
+          <a href="#ambientes" class="btn-outline inline-flex items-center px-7 py-3.5 text-sm">
+            Ver nossos projetos
           </a>
         </div>
 
-        <div class="hero-trust hero-enter hero-enter-d3" id="heroTrust">
-          <div class="hero-trust-item">
-            <span class="hero-stars">★★★★★</span>
-            <strong class="ml-2">4,9</strong>
+        <div class="hero-benefits hero-enter hero-enter-d3" id="heroTrust">
+          <div class="hero-benefit">
+            <span class="iconify hero-benefit-icon" data-icon="lucide:check-circle"></span>
+            <span><strong>Orçamento gratuito</strong></span>
           </div>
-          <div class="hero-trust-item"><strong>+2.000</strong> projetos realizados</div>
-          <div class="hero-trust-item">Atendimento em todo o <strong>Rio de Janeiro</strong></div>
+          <div class="hero-benefit">
+            <span class="iconify hero-benefit-icon" data-icon="lucide:check-circle"></span>
+            <span><strong>Visita técnica</strong> no local</span>
+          </div>
+          <div class="hero-benefit">
+            <span class="iconify hero-benefit-icon" data-icon="lucide:check-circle"></span>
+            <span>Atendimento em todo o <strong>Rio de Janeiro</strong></span>
+          </div>
         </div>
       </div>
     </div>
@@ -347,6 +585,39 @@
     <a href="#materiais" class="scroll-hint hero-enter hero-enter-d4" id="heroScroll" aria-label="Rolar para conteúdo">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 3v10M4 9l4 4 4-4"/></svg>
     </a>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="section-padding border-b border-white/5" id="diferenciais">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="diff-card reveal">
+          <div class="diff-icon"><span class="iconify text-2xl" data-icon="lucide:factory"></span></div>
+          <h3 class="text-sm font-medium text-ice mb-1">Fabricação própria</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">Corte e acabamento na nossa fábrica, com controle total de qualidade.</p>
+        </div>
+        <div class="diff-card reveal reveal-delay-1">
+          <div class="diff-icon"><span class="iconify text-2xl" data-icon="lucide:ruler"></span></div>
+          <h3 class="text-sm font-medium text-ice mb-1">Medição técnica</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">Equipe vai até o local para medir e montar o orçamento com precisão.</p>
+        </div>
+        <div class="diff-card reveal reveal-delay-2">
+          <div class="diff-icon"><span class="iconify text-2xl" data-icon="lucide:hard-hat"></span></div>
+          <h3 class="text-sm font-medium text-ice mb-1">Instalação especializada</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">Equipe própria treinada para instalação impecável de pedras naturais.</p>
+        </div>
+        <div class="diff-card reveal reveal-delay-1">
+          <div class="diff-icon"><span class="iconify text-2xl" data-icon="lucide:award"></span></div>
+          <h3 class="text-sm font-medium text-ice mb-1">Mais de 25 anos</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">Experiência desde 1997 atendendo arquitetos, construtoras e clientes finais.</p>
+        </div>
+        <div class="diff-card reveal reveal-delay-2 sm:col-span-2 lg:col-span-1">
+          <div class="diff-icon"><span class="iconify text-2xl" data-icon="lucide:heart-handshake"></span></div>
+          <h3 class="text-sm font-medium text-ice mb-1">Atendimento personalizado</h3>
+          <p class="text-xs text-stone-500 leading-relaxed">Consultoria na escolha do material e acompanhamento em cada etapa.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- MARCAS -->
@@ -365,12 +636,13 @@
   </section>
 
   <!-- CATÁLOGO / MATERIAIS -->
-  <section class="py-20 lg:py-28 bg-neutral-950" id="materiais">
+  <section class="section-padding bg-neutral-950" id="materiais">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 reveal">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 reveal">
         <div>
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">Materiais</h2>
-          <p class="text-stone-500 text-sm max-w-md">Parte do que temos em estoque. Se não encontrar o que procura, mande uma mensagem — a gente ajuda a escolher.</p>
+          <p class="section-label">Catálogo</p>
+          <h2 class="section-title mb-2">Materiais</h2>
+          <p class="text-stone-500 text-sm max-w-md leading-relaxed">Pedras naturais e superfícies premium selecionadas. Se não encontrar o que procura, nossa equipe orienta na escolha ideal.</p>
         </div>
         <div class="flex flex-wrap gap-2" id="filterBtns">
           <button class="filter-btn active-filter text-xs font-medium px-4 py-2 rounded-md border border-white/10" data-filter="todos" onclick="filterProducts('todos')">Todos</button>
@@ -381,7 +653,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="productGrid">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="productGrid">
         <!-- Products will be injected by JS -->
       </div>
 
@@ -394,65 +666,161 @@
   </section>
 
   <!-- PROJETOS -->
-  <section class="py-20 lg:py-28" id="ambientes">
+  <section class="section-padding" id="ambientes">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="mb-10 reveal">
-        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">Projetos realizados</h2>
-        <p class="text-stone-500 text-sm max-w-lg">Alguns trabalhos feitos pela Granorte — bancadas, revestimentos e acabamentos em pedra natural.</p>
+      <div class="mb-12 reveal">
+        <p class="section-label">Portfólio</p>
+        <h2 class="section-title mb-2">Projetos realizados</h2>
+        <p class="text-stone-500 text-sm max-w-lg leading-relaxed">Cada projeto reflete nosso compromisso com precisão, estética e acabamento de alto padrão.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal" id="projectGallery">
-        <div class="ambient-img rounded-xl cursor-pointer relative lg:col-span-2 lg:row-span-2" onclick="openLightbox('static/marmore (1).jpeg')">
-          <img src="static/marmore (1).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 lg:h-full min-h-[16rem] object-cover rounded-xl">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal auto-rows-fr" id="projectGallery"></div>
+    </div>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section class="section-padding bg-neutral-950 border-y border-white/5" id="metricas">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div class="metric-item reveal">
+          <p class="metric-value"><span data-count="2000" data-suffix="+">0</span></p>
+          <p class="metric-label">Projetos realizados</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (2).jpeg')">
-          <img src="static/marmore (2).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        <div class="metric-item reveal reveal-delay-1">
+          <p class="metric-value"><span data-count="25" data-suffix="+">0</span></p>
+          <p class="metric-label">Anos de experiência</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (3).jpeg')">
-          <img src="static/marmore (3).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        <div class="metric-item reveal reveal-delay-2">
+          <p class="metric-value"><span data-count="4.9" data-decimals="1" data-suffix="★">0</span></p>
+          <p class="metric-label">Avaliação média</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (4).jpeg')">
-          <img src="static/marmore (4).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        <div class="metric-item reveal reveal-delay-3">
+          <p class="metric-value"><span data-count="100" data-suffix="%">0</span></p>
+          <p class="metric-label">Equipe própria</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (5).jpeg')">
-          <img src="static/marmore (5).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="section-padding" id="depoimentos">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="mb-12 reveal">
+        <p class="section-label">Clientes</p>
+        <h2 class="section-title mb-2">O que dizem sobre nós</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="testimonial-card reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="testimonial-avatar">MH</div>
+            <div>
+              <p class="text-sm font-medium text-ice">Maria Helena R.</p>
+              <p class="text-xs text-stone-500">Arquiteta · Leblon, RJ</p>
+            </div>
+          </div>
+          <p class="testimonial-stars mb-3">★★★★★</p>
+          <p class="text-sm text-stone-400 leading-relaxed">"Precisão no corte e prazo cumprido. Indico para todos os meus projetos residenciais de alto padrão."</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative" onclick="openLightbox('static/marmore (6).jpeg')">
-          <img src="static/marmore (6).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="testimonial-avatar">RS</div>
+            <div>
+              <p class="text-sm font-medium text-ice">Roberto Silva</p>
+              <p class="text-xs text-stone-500">Cliente final · Barra da Tijuca</p>
+            </div>
+          </div>
+          <p class="testimonial-stars mb-3">★★★★★</p>
+          <p class="text-sm text-stone-400 leading-relaxed">"A equipe foi até o apartamento, mediu tudo e a bancada ficou perfeita. Atendimento direto, sem enrolação."</p>
         </div>
-        <div class="ambient-img rounded-xl cursor-pointer relative sm:col-span-2 lg:col-span-1" onclick="openLightbox('static/marmore (7).jpeg')">
-          <img src="static/marmore (7).jpeg" alt="Projeto Granorte — mármore" class="w-full h-64 object-cover rounded-xl">
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="testimonial-avatar">AC</div>
+            <div>
+              <p class="text-sm font-medium text-ice">Ana Costa</p>
+              <p class="text-xs text-stone-500">Designer de interiores · Niterói</p>
+            </div>
+          </div>
+          <p class="testimonial-stars mb-3">★★★★★</p>
+          <p class="text-sm text-stone-400 leading-relaxed">"Qualidade impecável na instalação. A Granorte entende o que arquitetos e designers precisam."</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SOBRE -->
-  <section class="py-20 lg:py-28 bg-neutral-950" id="sobre">
-    <div class="max-w-3xl mx-auto px-6 lg:px-8 reveal">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-6">Quem somos</h2>
-      <p class="text-stone-400 leading-relaxed mb-5">
-        A Granorte Marmoraria nasceu em 1997 no Rio de Janeiro. Hoje atendemos arquitetos, construtoras e clientes finais — mas o jeito de trabalhar continua o mesmo: atendimento direto, sem enrolação.
-      </p>
-      <p class="text-stone-400 leading-relaxed mb-8">
-        Temos mármores importados, granitos nacionais e superfícies como Silestone e Dekton. Você escolhe a pedra no showroom e a gente cuida do corte, acabamento e instalação.
-      </p>
-      <ul class="space-y-3 text-sm text-stone-400 mb-8">
-        <li class="flex gap-2"><span class="text-brand-400">—</span> Showroom com amostras disponíveis para ver e tocar</li>
-        <li class="flex gap-2"><span class="text-brand-400">—</span> Corte e acabamento na própria fábrica</li>
-        <li class="flex gap-2"><span class="text-brand-400">—</span> Instalação com equipe própria</li>
-      </ul>
-      <a href="#ambientes" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">Ver projetos realizados →</a>
+  <section class="section-padding bg-neutral-950" id="sobre">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start reveal">
+        <div>
+          <p class="section-label">Nossa história</p>
+          <h2 class="section-title mb-6">Quem somos</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <p class="timeline-year">1997</p>
+              <p class="timeline-text">Fundação da Granorte Marmoraria no Rio de Janeiro, com foco em atendimento direto e qualidade.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <p class="timeline-year">2005 — 2015</p>
+              <p class="timeline-text">Expansão do portfólio e consolidação como parceira de arquitetos e construtoras em todo o RJ.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <p class="timeline-year">2016</p>
+              <p class="timeline-text">Inauguração da fábrica própria — corte, acabamento e controle de qualidade sob o mesmo teto.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-dot"></span>
+              <p class="timeline-year">Hoje</p>
+              <p class="timeline-text">Mais de 2.000 projetos entregues, equipe própria de instalação e atendimento em todo o Rio de Janeiro.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="text-stone-400 leading-relaxed mb-5">
+            A Granorte nasceu em 1997 com um jeito simples de trabalhar: atendimento direto, sem intermediários e com compromisso em cada entrega.
+          </p>
+          <p class="text-stone-400 leading-relaxed mb-8">
+            Trabalhamos com mármores importados, granitos nacionais e superfícies como Silestone e Dekton. Nossa equipe orienta na escolha do material, vai até o local para medir e cuida de todo o processo — da fabricação à instalação.
+          </p>
+          <ul class="space-y-3 text-sm text-stone-400 mb-8">
+            <li class="flex gap-2"><span class="text-brand-400">—</span> Visita no local para medição e orçamento</li>
+            <li class="flex gap-2"><span class="text-brand-400">—</span> Orientação na escolha do material</li>
+            <li class="flex gap-2"><span class="text-brand-400">—</span> Corte e acabamento na própria fábrica</li>
+            <li class="flex gap-2"><span class="text-brand-400">—</span> Instalação com equipe própria</li>
+          </ul>
+          <a href="#ambientes" class="text-sm text-brand-400 hover:text-brand-300 transition-colors">Ver projetos realizados →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section-padding" id="cta-final">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 reveal">
+      <div class="cta-final text-center px-8 py-14 md:py-16">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-ice mb-4">
+          Vamos transformar seu projeto em realidade?
+        </h2>
+        <p class="text-stone-400 text-sm md:text-base max-w-lg mx-auto mb-8 leading-relaxed">
+          Conte com nossa equipe do orçamento à instalação. Orçamento gratuito, visita técnica e resposta em até 24 horas.
+        </p>
+        <a href="#cotacao" class="btn-gold btn-gold-primary inline-flex items-center px-8 py-4 text-sm md:text-base">
+          Solicitar orçamento gratuito
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- COTAÇÃO / CONTATO -->
-  <section class="py-20 lg:py-28 bg-neutral-950" id="contato">
+  <section class="section-padding bg-neutral-950" id="contato">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16" id="cotacao">
         <div class="reveal">
-          <h2 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">Fale conosco</h2>
-          <p class="text-stone-400 leading-relaxed mb-8">Manda os detalhes do projeto — material, metragem, prazo — que a gente responde com um orçamento.</p>
+          <p class="section-label">Contato</p>
+          <h2 class="section-title mb-4">Fale conosco</h2>
+          <p class="text-stone-400 leading-relaxed mb-8">Nossa equipe vai até o seu endereço para medir e preparar o orçamento. Também pode mandar os detalhes do projeto — material, metragem, prazo — que a gente responde.</p>
 
           <div class="space-y-5 text-sm">
             <div>
@@ -475,8 +843,8 @@
         </div>
 
         <div class="reveal">
-          <form id="quoteForm" class="bg-neutral-900 border border-white/5 rounded-xl p-6 lg:p-8" onsubmit="handleSubmit(event)">
-            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <form id="quoteForm" class="form-premium p-7 lg:p-9" onsubmit="handleSubmit(event)">
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label class="block text-xs text-stone-400 mb-1.5 font-medium">Nome completo *</label>
                 <input type="text" class="form-input" placeholder="Seu nome" required>
@@ -486,7 +854,7 @@
                 <input type="email" class="form-input" placeholder="seu@email.com" required>
               </div>
             </div>
-            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <div class="grid sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label class="block text-xs text-stone-400 mb-1.5 font-medium">Telefone *</label>
                 <input type="tel" class="form-input" placeholder="(21) 99999-9999" required>
@@ -503,7 +871,7 @@
                 </select>
               </div>
             </div>
-            <div class="mb-4">
+            <div class="mb-5">
               <label class="block text-xs text-stone-400 mb-1.5 font-medium">Tipo de material</label>
               <select class="form-input">
                 <option value="">Selecione o material</option>
@@ -516,7 +884,7 @@
                 <option>Ainda não sei</option>
               </select>
             </div>
-            <div class="mb-4">
+            <div class="mb-5">
               <label class="block text-xs text-stone-400 mb-1.5 font-medium">Aplicação</label>
               <select class="form-input">
                 <option value="">Selecione a aplicação</option>
@@ -530,14 +898,28 @@
                 <option>Vários</option>
               </select>
             </div>
-            <div class="mb-6">
+            <div class="mb-7">
               <label class="block text-xs text-stone-400 mb-1.5 font-medium">Descrição do projeto</label>
               <textarea class="form-input" rows="4" placeholder="Conte-nos sobre seu projeto, metragem aproximada, prazos..."></textarea>
             </div>
-            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-400 text-graphite font-medium py-3 rounded-md transition-colors">
-              Enviar
+            <div class="space-y-2.5 mb-6 pt-2 border-t border-white/5">
+              <div class="form-trust-item">
+                <span class="iconify form-trust-check" data-icon="lucide:check"></span>
+                Orçamento gratuito
+              </div>
+              <div class="form-trust-item">
+                <span class="iconify form-trust-check" data-icon="lucide:check"></span>
+                Resposta em até 24 horas
+              </div>
+              <div class="form-trust-item">
+                <span class="iconify form-trust-check" data-icon="lucide:check"></span>
+                Sem compromisso
+              </div>
+            </div>
+            <button type="submit" class="w-full btn-gold btn-gold-primary py-3.5 text-sm font-medium">
+              Enviar solicitação
             </button>
-            <p class="text-xs text-stone-600 text-center mt-3">Respondemos em até 1 dia útil.</p>
+            <p class="text-xs text-stone-600 text-center mt-4">Respondemos em até 1 dia útil.</p>
           </form>
         </div>
       </div>
@@ -596,6 +978,11 @@
       porcelanato: 'Porcelanato',
     };
 
+    const stoneImages = [
+      'static/marmore (1).jpeg', 'static/marmore (2).jpeg', 'static/marmore (3).jpeg',
+      'static/marmore (4).jpeg', 'static/marmore (5).jpeg', 'static/marmore (6).jpeg', 'static/marmore (7).jpeg',
+    ];
+
     const products = [
       { name: 'Calacatta Gold', category: 'marmore', origin: 'Itália', desc: 'Branco com veios dourados' },
       { name: 'Statuario Venato', category: 'marmore', origin: 'Itália', desc: 'Branco com veios cinza delicados' },
@@ -616,6 +1003,15 @@
     ];
 
     // ==========================================
+    // INTERSECTION OBSERVER - REVEALS
+    // ==========================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.12 });
+
+    // ==========================================
     // RENDER PRODUCTS
     // ==========================================
     const productGrid = document.getElementById('productGrid');
@@ -624,15 +1020,30 @@
       const filtered = filter === 'todos' ? products : products.filter(p => p.category === filter);
       productGrid.innerHTML = '';
       filtered.forEach((p) => {
+        const img = stoneImages[products.indexOf(p) % stoneImages.length];
         const card = document.createElement('div');
-        card.className = 'product-card visible-card rounded-xl bg-neutral-900 border p-5';
+        card.className = 'product-card visible-card reveal';
         card.innerHTML = `
-          <span class="inline-block text-[10px] uppercase tracking-wide text-brand-400 mb-2">${categoryLabels[p.category]}</span>
-          <h3 class="font-medium text-sm mb-1">${p.name}</h3>
-          <p class="text-xs text-stone-500 leading-relaxed">${p.desc}</p>
-          <p class="text-xs text-stone-600 mt-3">${p.origin}</p>
+          <div class="product-card-img-wrap">
+            <img src="${img}" alt="${p.name}" loading="lazy">
+          </div>
+          <div class="product-card-body">
+            <span class="inline-block text-[10px] uppercase tracking-wide text-brand-400 mb-2">${categoryLabels[p.category]}</span>
+            <h3 class="font-medium text-sm mb-1 text-ice">${p.name}</h3>
+            <p class="text-xs text-stone-500 leading-relaxed">${p.desc}</p>
+            <p class="text-xs text-stone-600 mt-2">${p.origin}</p>
+            <a href="#cotacao" class="product-card-btn">
+              Solicitar orçamento
+              <span class="iconify" data-icon="lucide:arrow-right"></span>
+            </a>
+          </div>
         `;
         productGrid.appendChild(card);
+        revealObserver.observe(card);
+        requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) card.classList.add('active');
+        });
       });
     }
     renderProducts();
@@ -669,6 +1080,40 @@
         }
       }
     }
+
+    // ==========================================
+    // PORTFOLIO
+    // ==========================================
+    const projects = [
+      { img: 'static/marmore (1).jpeg', name: 'Cozinha Premium', material: 'Mármore Calacatta', location: 'Barra da Tijuca, RJ', featured: true },
+      { img: 'static/marmore (2).jpeg', name: 'Banheiro Master', material: 'Mármore Nero Marquina', location: 'Leblon, RJ' },
+      { img: 'static/marmore (3).jpeg', name: 'Bancada Gourmet', material: 'Quartzo Silestone', location: 'Recreio, RJ' },
+      { img: 'static/marmore (4).jpeg', name: 'Área Gourmet', material: 'Granito São Gabriel', location: 'Niterói, RJ' },
+      { img: 'static/marmore (5).jpeg', name: 'Lavabo Social', material: 'Mármore Carrara', location: 'Tijuca, RJ' },
+      { img: 'static/marmore (6).jpeg', name: 'Cozinha Integrada', material: 'Dekton Laurent', location: 'Botafogo, RJ' },
+      { img: 'static/marmore (7).jpeg', name: 'Revestimento', material: 'Granito Blue Bahia', location: 'Copacabana, RJ' },
+    ];
+
+    const projectGallery = document.getElementById('projectGallery');
+    projects.forEach((proj) => {
+      const card = document.createElement('div');
+      card.className = `portfolio-card${proj.featured ? ' featured sm:col-span-2 lg:col-span-2 lg:row-span-2' : ''}`;
+      card.onclick = () => openLightbox(proj.img);
+      card.innerHTML = `
+        <img src="${proj.img}" alt="${proj.name}" class="w-full h-64${proj.featured ? ' lg:h-full lg:min-h-[20rem]' : ''} object-cover">
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h3 class="text-sm font-medium text-ice mb-0.5">${proj.name}</h3>
+          <p class="text-xs text-stone-400">${proj.material}</p>
+          <p class="text-xs text-stone-500 mt-0.5">${proj.location}</p>
+          <span class="portfolio-btn">
+            Ver projeto
+            <span class="iconify" data-icon="lucide:arrow-right"></span>
+          </span>
+        </div>
+      `;
+      projectGallery.appendChild(card);
+    });
 
     // ==========================================
     // LIGHTBOX
@@ -711,16 +1156,38 @@
       });
     });
 
-    // ==========================================
-    // INTERSECTION OBSERVER - REVEALS
-    // ==========================================
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
-    }, { threshold: 0.1 });
-
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ==========================================
+    // METRICS COUNTER
+    // ==========================================
+    function animateCounter(el) {
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const duration = 1800;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = target * eased;
+        el.textContent = (decimals ? value.toFixed(decimals) : Math.floor(value).toLocaleString('pt-BR')) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const metricsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
+        metricsObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+
+    const metricasSection = document.getElementById('metricas');
+    if (metricasSection) metricsObserver.observe(metricasSection);
 
     // ==========================================
     // FORM SUBMIT
