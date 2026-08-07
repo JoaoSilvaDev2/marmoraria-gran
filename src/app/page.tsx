@@ -1,7 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Differentials from "@/components/sections/Differentials";
-import StoneConfigurator from "@/components/sections/StoneConfigurator";
-import StoneGallery from "@/components/sections/StoneGallery";
+import StoneExplorer from "@/components/sections/StoneExplorer";
 import BeforeAfter from "@/components/sections/BeforeAfter";
 import Projects from "@/components/sections/Projects";
 import Process from "@/components/sections/Process";
@@ -15,8 +14,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Differentials />
-      <StoneConfigurator />
-      <StoneGallery />
+      <StoneExplorer />
       <BeforeAfter />
       <Projects />
       <Process />

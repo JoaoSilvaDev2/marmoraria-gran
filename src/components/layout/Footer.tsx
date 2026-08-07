@@ -3,7 +3,7 @@ import Link from "next/link";
 import { company } from "@/lib/data";
 
 const footerLinks = [
-  { href: "#configurador", label: "Materiais" },
+  { href: "#materiais", label: "Materiais" },
   { href: "#projetos", label: "Projetos" },
   { href: "#processo", label: "Processo" },
   { href: "#contato", label: "Contato" },

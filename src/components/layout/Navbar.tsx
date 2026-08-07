@@ -8,7 +8,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#configurador", label: "Materiais" },
+  { href: "#materiais", label: "Materiais" },
   { href: "#projetos", label: "Projetos" },
   { href: "#processo", label: "Processo" },
   { href: "#contato", label: "Contato" },
