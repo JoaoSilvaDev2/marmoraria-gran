@@ -32,12 +32,12 @@ export default function BeforeAfter() {
             onTouchMove={(e) => onMove(e.touches[0].clientX)}
             data-cursor="zoom"
           >
-            <Image src="/images/marmore (6).jpeg" alt="Depois" fill className="object-cover" sizes="100vw" />
+            <Image src="/images/depois.jpeg" alt="Depois" fill className="object-cover" sizes="100vw" />
             <div
               className="absolute inset-0 overflow-hidden"
               style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
             >
-              <Image src="/images/marmore (7).jpeg" alt="Antes" fill className="object-cover grayscale" sizes="100vw" />
+              <Image src="/images/antes.jpeg" alt="Antes" fill className="object-cover grayscale" sizes="100vw" />
             </div>
             <div
               className="absolute top-0 bottom-0 z-10 w-px bg-gold shadow-[0_0_20px_rgb(176_141_87/0.6)]"

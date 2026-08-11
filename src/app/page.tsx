@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import Differentials from "@/components/sections/Differentials";
 import StoneExplorer from "@/components/sections/StoneExplorer";
+import MaterialsCatalog from "@/components/sections/MaterialsCatalog";
 import BeforeAfter from "@/components/sections/BeforeAfter";
 import Projects from "@/components/sections/Projects";
 import Process from "@/components/sections/Process";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <Hero />
       <Differentials />
       <StoneExplorer />
+      <MaterialsCatalog />
       <BeforeAfter />
       <Projects />
       <Process />

@@ -8,14 +8,14 @@ export const siteMetadata: Metadata = {
     template: `%s · ${company.name}`,
   },
   description:
-    "Marmoraria premium no Rio de Janeiro. Fabricação própria, medição técnica e instalação especializada. Mármore, granito, quartzo e porcelanato de alto padrão.",
+    "Marmoraria premium no Rio de Janeiro. Fabricação própria, medição técnica e instalação especializada. Mármore, granito e quartzo de alto padrão.",
   keywords: [
     "marmoraria",
     "mármore",
     "granito",
     "quartzo",
     "Silestone",
-    "Dekton",
+    "Caesarstone",
     "bancadas",
     "Rio de Janeiro",
     "Granorte",
