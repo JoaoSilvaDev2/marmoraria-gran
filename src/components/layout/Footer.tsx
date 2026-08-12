@@ -23,7 +23,7 @@ export default function Footer() {
               className="mb-5 h-8 w-auto drop-shadow-[0_0_20px_rgb(176_141_87/0.2)]"
             />
             <p className="max-w-xs text-sm leading-relaxed text-concrete">
-              {company.legalName} — Rio de Janeiro. Pedras naturais e superfícies de alto padrão.
+              {company.legalName} — Rio de Janeiro. Mármore, granito e quartzo.
             </p>
           </div>
           <div>

@@ -89,7 +89,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-lg text-sm leading-relaxed text-concrete md:text-base"
         >
-          Da medição à instalação — mármore, granito e superfícies premium para quem exige precisão.
+          Da medição à instalação — mármore, granito e quartzo para quem exige precisão.
         </motion.p>
 
         <motion.div

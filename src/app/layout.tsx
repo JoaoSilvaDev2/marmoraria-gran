@@ -8,6 +8,7 @@ import ProgressBar from "@/components/layout/ProgressBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/layout/BackToTop";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,15 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
           <BackToTop />
-          <a
-            href="https://wa.me/5521974793847"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-green-700 text-white shadow-lg transition-transform hover:scale-105 hover:bg-green-600"
-            aria-label="WhatsApp"
-          >
-            💬
-          </a>
+          <WhatsAppButton />
         </SmoothScroll>
       </body>
     </html>

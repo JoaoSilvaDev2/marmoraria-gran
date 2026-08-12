@@ -86,37 +86,21 @@ export const stones: StoneMaterial[] = [
 
 export type MaterialCategory = "marmore" | "granito" | "quartzo";
 
-export type CatalogProduct = {
-  id: string;
-  name: string;
-  category: MaterialCategory;
-  origin: string;
-  description: string;
-  image: string;
-};
-
-export const catalogProducts: CatalogProduct[] = [
-  { id: "calacatta-gold", name: "Calacatta Gold", category: "marmore", origin: "Itália", description: "Branco com veios dourados.", image: "/images/marmore (1).jpeg" },
-  { id: "statuario", name: "Statuario Venato", category: "marmore", origin: "Itália", description: "Branco com veios cinza delicados.", image: "/images/marmore (2).jpeg" },
-  { id: "nero-marquina", name: "Nero Marquina", category: "marmore", origin: "Espanha", description: "Preto com veios brancos.", image: "/images/marmore (3).jpeg" },
-  { id: "carrara", name: "Carrara Bianco", category: "marmore", origin: "Itália", description: "Branco clássico, veios suaves.", image: "/images/marmore (4).jpeg" },
-  { id: "sao-gabriel", name: "São Gabriel Cinza", category: "granito", origin: "Brasil", description: "Cinza com movimento natural.", image: "/images/marmore (5).jpeg" },
-  { id: "blue-bahia", name: "Blue Bahia", category: "granito", origin: "Brasil", description: "Azul profundo com reflexos.", image: "/images/marmore (6).jpeg" },
-  { id: "preto-tome", name: "Granito Preto São Tomé", category: "granito", origin: "Brasil", description: "Preto uniforme.", image: "/images/marmore (7).jpeg" },
-  { id: "ubatuba", name: "Ubatuba Verde", category: "granito", origin: "Brasil", description: "Verde escuro, uso interno.", image: "/images/marmore (1).jpeg" },
-  { id: "silestone-miami", name: "Silestone Miami Vena", category: "quartzo", origin: "Espanha", description: "Quartzo com veio marmorizado.", image: "/images/marmore (2).jpeg" },
-  { id: "caesarstone-calacatta", name: "Caesarstone Calacatta Nuovo", category: "quartzo", origin: "Israel", description: "Imitação de Calacatta.", image: "/images/marmore (3).jpeg" },
-  { id: "silestone-marfil", name: "Silestone Eternal Marfil", category: "quartzo", origin: "Espanha", description: "Tom marfim, baixa manutenção.", image: "/images/marmore (4).jpeg" },
-  { id: "caesarstone-cloud", name: "Caesarstone Cloudburst Concrete", category: "quartzo", origin: "Israel", description: "Aspecto cimento, tom neutro.", image: "/images/marmore (5).jpeg" },
-];
-
 export const projects = [
-  { id: "1", title: "Cozinha Premium", material: "Mármore Calacatta", location: "Barra da Tijuca", image: "/images/marmore (1).jpeg", span: "lg:col-span-2 lg:row-span-2" },
-  { id: "2", title: "Banheiro Master", material: "Mármore Nero Marquina", location: "Leblon", image: "/images/marmore (2).jpeg", span: "" },
-  { id: "3", title: "Bancada Gourmet", material: "Quartzo Silestone", location: "Recreio", image: "/images/marmore (3).jpeg", span: "" },
-  { id: "4", title: "Área Gourmet", material: "Granito São Gabriel", location: "Niterói", image: "/images/marmore (4).jpeg", span: "sm:col-span-2" },
-  { id: "5", title: "Lavabo Social", material: "Mármore Carrara", location: "Tijuca", image: "/images/marmore (5).jpeg", span: "" },
-  { id: "6", title: "Revestimento", material: "Granito Blue Bahia", location: "Copacabana", image: "/images/marmore (7).jpeg", span: "" },
+  { id: "1", title: "Ilha com cascata", material: "Mármore branco veio dourado", location: "Residencial", image: "/images/projetos/projeto-01-ilha-cozinha.jpg" },
+  { id: "2", title: "Banheiro master", material: "Mármore bege", location: "Residencial", image: "/images/projetos/projeto-02-banheiro-bege.jpg" },
+  { id: "3", title: "Lavabo esculpido", material: "Mármore travertino", location: "Residencial", image: "/images/projetos/projeto-03-banheiro-cuba-esculpida.jpg" },
+  { id: "4", title: "Banheiro contemporâneo", material: "Granito preto polido", location: "Residencial", image: "/images/projetos/projeto-04-banheiro-granito-preto.jpg" },
+  { id: "5", title: "Banheiro minimalista", material: "Quartzo branco · cuba esculpida", location: "Residencial", image: "/images/projetos/projeto-05-banheiro-cuba-branca.jpg" },
+  { id: "6", title: "Cozinha integrada", material: "Quartzo branco", location: "Residencial", image: "/images/projetos/projeto-06-cozinha-branca.jpg" },
+  { id: "7", title: "Ilha e bancada", material: "Mármore branco", location: "Residencial", image: "/images/projetos/projeto-07-ilha-marmore-branco.jpg" },
+  { id: "8", title: "Cozinha com ilha", material: "Granito preto · frontão", location: "Residencial", image: "/images/projetos/projeto-08-cozinha-granito-preto.jpg" },
+  { id: "9", title: "Banheiro com frontão", material: "Mármore Crema Marfil", location: "Residencial", image: "/images/projetos/projeto-09-banheiro-marmore-integrado.jpg" },
+  { id: "10", title: "Área gourmet externa", material: "Granito preto · pedra ferro", location: "Residencial", image: "/images/projetos/projeto-10-area-gourmet-externa.jpg" },
+  { id: "11", title: "Escada em mármore", material: "Mármore branco veiado", location: "Residencial", image: "/images/projetos/projeto-11-escada-marmore.jpg" },
+  { id: "12", title: "Bancada integrada", material: "Granito preto polido", location: "Residencial", image: "/images/projetos/projeto-12-bancada-granito-preto.jpg" },
+  { id: "13", title: "Área de serviço", material: "Mármore branco", location: "Residencial", image: "/images/projetos/projeto-13-area-servico.jpg" },
+  { id: "14", title: "Peitoril de janela", material: "Mármore bege polido", location: "Residencial", image: "/images/projetos/projeto-14-peitoril-marmore.jpg" },
 ];
 
 export const processSteps = [

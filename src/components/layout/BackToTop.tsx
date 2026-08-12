@@ -21,7 +21,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-24 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-ice/10 bg-surface/80 text-ice backdrop-blur-md transition-colors hover:border-gold/30 hover:text-gold md:bottom-8"
+          className="fixed bottom-[5.5rem] right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-ice/10 bg-surface/80 text-ice backdrop-blur-md transition-colors hover:border-gold/30 hover:text-gold md:bottom-28 md:right-8"
           aria-label="Voltar ao topo"
         >
           ↑

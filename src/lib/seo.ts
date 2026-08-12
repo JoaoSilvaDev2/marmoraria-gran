@@ -4,7 +4,7 @@ import { company } from "./data";
 export const siteMetadata: Metadata = {
   metadataBase: new URL(company.url),
   title: {
-    default: `${company.name} · Mármore, Granito e Superfícies Premium`,
+    default: `${company.name} · Mármore, Granito e Quartzo`,
     template: `%s · ${company.name}`,
   },
   description:
