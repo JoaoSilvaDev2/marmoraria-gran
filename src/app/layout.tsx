@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { siteMetadata, jsonLd } from "@/lib/seo";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import CustomCursor from "@/components/providers/CustomCursor";
 import ProgressBar from "@/components/layout/ProgressBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans">
         <SmoothScroll>
-          <CustomCursor />
           <ProgressBar />
           <Navbar />
           <main>{children}</main>
