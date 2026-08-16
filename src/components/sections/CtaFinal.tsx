@@ -27,7 +27,7 @@ export default function CtaFinal() {
   const slide = SLIDES[index];
 
   return (
-    <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-graphite">
+    <section id="cta" className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-graphite">
       <div className="absolute inset-0">
         <AnimatePresence mode="sync">
           <motion.div

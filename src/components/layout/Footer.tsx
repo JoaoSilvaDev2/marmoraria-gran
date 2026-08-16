@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { company } from "@/lib/data";
+import { company, whatsappUrl } from "@/lib/data";
 
 const footerLinks = [
   { href: "#catalogo", label: "Materiais" },
   { href: "#projetos", label: "Projetos" },
-  { href: "#processo", label: "Processo" },
+  { href: "#processo", label: "Como contratar" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -50,7 +50,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:text-ice">
+                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-ice">
                   WhatsApp · {company.phone}
                 </a>
               </li>

@@ -15,7 +15,7 @@ const animations = [
 
 export default function Differentials() {
   return (
-    <section className="section-pad">
+    <section id="diferenciais" className="section-pad">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <p className="label-premium">Diferenciais</p>

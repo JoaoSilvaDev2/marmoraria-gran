@@ -182,7 +182,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-pad overflow-hidden">
+    <section id="depoimentos" ref={sectionRef} className="section-pad overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
           <p className="label-premium">Clientes</p>

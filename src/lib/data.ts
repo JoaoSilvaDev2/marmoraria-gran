@@ -11,11 +11,16 @@ export const company = {
   cnpj: "02.195.761/0001-71",
   phone: "(21) 97479-3847",
   whatsapp: "5521974793847",
+  whatsappMessage: "Olá, vim pelo site e gostaria de fazer um orçamento",
   email: "granortemarmores@gmail.com",
   address: "Av. Pastor Martin Luther King Jr., 13655, Rio de Janeiro, RJ",
   founded: 1997,
   url: "https://joaoSilvaDev2.github.io/marmoraria-gran",
 };
+
+export function whatsappUrl(text = company.whatsappMessage) {
+  return `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(text)}`;
+}
 
 export type StoneMaterial = {
   id: string;

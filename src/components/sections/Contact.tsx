@@ -1,15 +1,31 @@
 "use client";
 
 import { FormEvent } from "react";
-import { company } from "@/lib/data";
+import { company, whatsappUrl } from "@/lib/data";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function Contact() {
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Recebemos sua mensagem. Retornamos em breve.");
-    (e.target as HTMLFormElement).reset();
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const role = String(data.get("role") || "").trim();
+    const project = String(data.get("project") || "").trim();
+
+    const lines = [
+      company.whatsappMessage,
+      "",
+      `Nome: ${name}`,
+      `E-mail: ${email}`,
+      `Telefone: ${phone}`,
+    ];
+    if (role) lines.push(`Profissão: ${role}`);
+    if (project) lines.push(`Projeto: ${project}`);
+
+    window.open(whatsappUrl(lines.join("\n")), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -32,7 +48,7 @@ export default function Contact() {
               </a>
             </li>
             <li>
-              <a href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:text-ice">
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="hover:text-ice">
                 WhatsApp · {company.phone}
               </a>
             </li>
@@ -51,6 +67,7 @@ export default function Contact() {
             <div className="mt-5">
               <label className="mb-1.5 block text-xs font-medium text-concrete">Descrição do projeto</label>
               <textarea
+                name="project"
                 rows={4}
                 className="w-full rounded-xl border border-ice/10 bg-graphite/50 px-4 py-3 text-sm text-ice outline-none transition-colors focus:border-gold/50"
                 placeholder="Material, metragem, prazo..."
@@ -64,7 +81,7 @@ export default function Contact() {
               ))}
             </ul>
             <MagneticButton type="submit" className="mt-8 w-full">
-              Enviar solicitação
+              Enviar no WhatsApp
             </MagneticButton>
           </form>
         </Reveal>

@@ -54,6 +54,10 @@
     @apply py-24 md:py-32 lg:py-40;
   }
 
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
   .label-premium {
     @apply text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-gold;
   }

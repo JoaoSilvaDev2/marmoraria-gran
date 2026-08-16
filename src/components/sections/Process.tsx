@@ -8,8 +8,8 @@ export default function Process() {
     <section id="processo" className="section-pad overflow-hidden bg-neutral-950">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <Reveal>
-          <p className="label-premium">Metodologia</p>
-          <h2 className="heading-display mt-3">Nosso processo</h2>
+          <p className="label-premium">Como contratar</p>
+          <h2 className="heading-display mt-3">Contrate nossos serviços em 4 passos</h2>
         </Reveal>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-8">

@@ -45,7 +45,7 @@ function CountUp({ value, suffix, decimals = 0 }: { value: number; suffix: strin
 
 export default function Metrics() {
   return (
-    <section className="section-pad border-y border-ice/5 bg-neutral-950">
+    <section id="metricas" className="section-pad border-y border-ice/5 bg-neutral-950">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-12">
           {metrics.map((m, i) => (
