@@ -38,6 +38,10 @@ export const siteMetadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: { canonical: company.url },
+  icons: {
+    icon: [{ url: `${company.url}/images/logo-dourada.png`, type: "image/png" }],
+    apple: [{ url: `${company.url}/images/logo-dourada.png`, type: "image/png" }],
+  },
 };
 
 export const jsonLd = {

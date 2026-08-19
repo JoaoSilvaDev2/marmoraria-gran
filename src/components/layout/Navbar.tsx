@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { whatsappUrl } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -65,7 +66,12 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <MagneticButton href="#contato" className="hidden px-6 py-3 text-xs sm:inline-flex md:px-8 md:text-sm">
+            <MagneticButton
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden px-6 py-3 text-xs sm:inline-flex md:px-8 md:text-sm"
+            >
               Orçamento gratuito
             </MagneticButton>
             <button
@@ -106,7 +112,12 @@ export default function Navbar() {
               </motion.div>
             ))}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="mt-10">
-              <MagneticButton href="#contato" onClick={() => setOpen(false)}>
+              <MagneticButton
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+              >
                 Solicitar orçamento gratuito
               </MagneticButton>
             </motion.div>

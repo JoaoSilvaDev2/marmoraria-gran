@@ -11,6 +11,8 @@ type MagneticButtonProps = {
   className?: string;
   variant?: "gold" | "outline";
   type?: "button" | "submit";
+  target?: string;
+  rel?: string;
 };
 
 export default function MagneticButton({
@@ -20,6 +22,8 @@ export default function MagneticButton({
   className,
   variant = "gold",
   type = "button",
+  target,
+  rel,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null);
 
@@ -61,6 +65,8 @@ export default function MagneticButton({
       <motion.a
         ref={ref as React.RefObject<HTMLAnchorElement>}
         href={href}
+        target={target}
+        rel={rel}
         onMouseMove={handleMove}
         onMouseLeave={reset}
         className={classes}

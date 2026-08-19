@@ -41,7 +41,6 @@ gtag('js', new Date());
 gtag('config', 'AW-18393203140');`,
           }}
         />
-        <link rel="icon" href="/images/logo-dourada.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
